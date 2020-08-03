@@ -1,6 +1,7 @@
 #include "monte_carlo_model.hpp"
 #include <random>
 #include <cmath>
+#include <chrono>
 #include <iostream>
 
 double MonteCarloModel::PriceOption(
@@ -15,8 +16,9 @@ double MonteCarloModel::PriceOption(
 {
     // Create a normal distribution that we can sample our normally distributed stochastic
     // variable from. The distribution has a mean of 0 and standard deviation of 1
-    std::normal_distribution<double> norm_dist(0, 1);
-    std::default_random_engine gen;
+    std::normal_distribution<double> norm_dist(0.0, 1.0);
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine gen(seed);
 
     // Simulate various stock price paths and accumulate their option payoffs
     double payoff_accumulator = 0;
@@ -28,7 +30,7 @@ double MonteCarloModel::PriceOption(
 
         if (print_debug)
         {
-            std::cout << stock_price << std::endl;
+            std::cout << i + 1 << ") " << stock_price << std::endl;
         }
 
         // Calculate the payoff given the simulated stock price
