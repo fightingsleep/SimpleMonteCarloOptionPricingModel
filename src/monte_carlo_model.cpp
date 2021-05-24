@@ -34,7 +34,7 @@ double MonteCarloModel::PriceOption(
         }
 
         // Calculate the payoff given the simulated stock price
-        if (option_type == CALL)
+        if (option_type == OptionType::CALL)
         {
             payoff_accumulator += std::max(stock_price - strike_price, 0.0);
         }
@@ -43,7 +43,7 @@ double MonteCarloModel::PriceOption(
             payoff_accumulator += std::max(strike_price - spot_price, 0.0);
         }
     }
-    
+
     // Return the average payoff of the option (discount back to today)
     return payoff_accumulator / num_simulations * std::exp(-risk_free_rate * years_until_expiry);
 }

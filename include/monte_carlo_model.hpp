@@ -5,7 +5,7 @@
 
 class MonteCarloModel
 {
-public:
+ public:
     // Price a European option using Monte Carlo simulation
     double PriceOption(
         double spot_price,
@@ -18,4 +18,4 @@ public:
         bool print_debug);
 };
 
-#endif //INCLUDE_MONTE_CARLO_MODEL_HPP_
+#endif // INCLUDE_MONTE_CARLO_MODEL_HPP_
